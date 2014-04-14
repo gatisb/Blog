@@ -1,5 +1,6 @@
 using System;
 using System.Globalization;
+using EPiServer;
 using EPiServer.Core;
 using EPiServer.Data.Dynamic;
 using EPiServer.DataAbstraction;
@@ -11,14 +12,14 @@ namespace ScheduledParameterJob.ExampleJob
     [ScheduledPlugInWithParameters(
         DisplayName = "Sample parameter job",
         Description = "Sample job with parameters",
-        DefinitionsClass = "EPiServer.Templates.Alloy.ScheduledParameterJob.ExampleJob.DefinitionSample",
-        DefinitionsAssembly = "EPiServer.Templates.Alloy"
+        DefinitionsClass = "ScheduledParameterJob.ExampleJob.DefinitionSample",
+        DefinitionsAssembly = "ScheduledParameterJob"
     )]
     public class SampleParameterJob : ScheduledJob
     {
         public static string Execute()
         {
-            var descriptor = PlugInDescriptor.Load("EPiServer.Templates.Alloy.ScheduledParameterJob.ExampleJob.SampleParameterJob", "EPiServer.Templates.Alloy");
+            var descriptor = PlugInDescriptor.Load("ScheduledParameterJob.ExampleJob.SampleParameterJob", "ScheduledParameterJob");
             var store = typeof (ScheduledJobParameters).GetStore();
             var parameters = store.LoadPersistedValuesFor(descriptor.ID.ToString(CultureInfo.InvariantCulture));
 

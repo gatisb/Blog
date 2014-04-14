@@ -8,11 +8,11 @@ using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using EPiServer.Data.Dynamic;
 using EPiServer.PlugIn;
-using EPiServer.Shell.WebForms;
+using EPiServer.UI;
 using EPiServer.UI.Admin;
 using ScheduledParameterJob.Extensions;
 
-[assembly: WebResource("EPiServer.Templates.Alloy.ScheduledParameterJob.Style.JobParameters.css", "text/css")]
+[assembly: System.Web.UI.WebResource("ScheduledParameterJob.Style.JobParameters.css", "text/css")]
 namespace ScheduledParameterJob
 {
     public class DatabaseJobAdapter : PageAdapter
@@ -102,7 +102,7 @@ namespace ScheduledParameterJob
         private void DisplaySystemMessage()
         {
             var databaseJob = (DatabaseJob) Control;
-            var systemPageBase = databaseJob.Page as WebFormsBase;
+            var systemPageBase = databaseJob.Page as SystemPageBase;
             if (systemPageBase == null)
             {
                 return;
@@ -240,7 +240,7 @@ namespace ScheduledParameterJob
         {
             var cssPath = Page
                 .ClientScript
-                .GetWebResourceUrl(typeof(DatabaseJobAdapter), "EPiServer.Templates.Alloy.ScheduledParameterJob.Style.JobParameters.css");
+                .GetWebResourceUrl(typeof(DatabaseJobAdapter), "ScheduledParameterJob.Style.JobParameters.css");
             var cssLink = new HtmlLink { Href = cssPath };
             cssLink.Attributes.Add("rel", "stylesheet");
             cssLink.Attributes.Add("type", "text/css");
